@@ -1,0 +1,11 @@
+[Wed Aug  3 16:24:35 2016] PHP Warning:  Unknown: failed to open stream: No such file or directory in Unknown on line 0
+[Wed Aug  3 16:24:35 2016] PHP Fatal error:  Unknown: Failed opening required 'index.php' (include_path='.:/usr/share/php') in Unknown on line 0
+[Wed Aug  3 16:24:35 2016] PHP Warning:  Unknown: failed to open stream: No such file or directory in Unknown on line 0
+[Wed Aug  3 16:24:35 2016] PHP Fatal error:  Unknown: Failed opening required 'index.php' (include_path='.:/usr/share/php') in Unknown on line 0
+[Wed Aug  3 16:24:38 2016] PHP Warning:  Unknown: failed to open stream: No such file or directory in Unknown on line 0
+[Wed Aug  3 16:24:38 2016] PHP Fatal error:  Unknown: Failed opening required 'index.php' (include_path='.:/usr/share/php') in Unknown on line 0
+[Wed Aug  3 16:24:40 2016] PHP Warning:  Unknown: failed to open stream: No such file or directory in Unknown on line 0
+[Wed Aug  3 16:24:40 2016] PHP Fatal error:  Unknown: Failed opening required 'index.php' (include_path='.:/usr/share/php') in Unknown on line 0
+[Wed Aug  3 16:24:42 2016] PHP Warning:  Unknown: failed to open stream: No such file or directory in Unknown on line 0
+[Wed Aug  3 16:24:42 2016] PHP Fatal error:  Unknown: Failed opening required 'index.php' (include_path='.:/usr/share/php') in Unknown on line 0
+[Wed Aug  3 16:30:09 2016] 127.0.0.1:60550 Invalid request (Unexpected EOF)
