@@ -11,6 +11,7 @@ git clone https://github.com/eugenkyky/geo_test.git test_assignment &&
 cd test_assignment &&
 touch database/test.sqlite &&
 chmod 777 database &&
+chmod 777 database/test.sqlite &&
 chmod 777 storage/logs &&
 composer install &&
 #create schema

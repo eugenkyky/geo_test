@@ -28,7 +28,7 @@ class OrderTest extends TestCase
     public function testCreate()
     {
         $client = new GuzzleHttp\Client();
-        $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json?address=%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B9+%D1%82%D0%B5%D0%B0%D1%82%D1%80&components=administrative_area:%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0|country:%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F&key=AIzaSyDRznmJXKt96uYHIwNpFNNKpeqHo6WkvVQ');
+        $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json?address=Kremlin&components=administrative_area:Moscow|country:Russia&key=AIzaSyDRznmJXKt96uYHIwNpFNNKpeqHo6WkvVQ');
         $array = json_decode($res->getBody(), true);
 
         $ll_array = $this->getLanLng($array);
@@ -39,7 +39,7 @@ class OrderTest extends TestCase
 
         $city = factory(App\City::class)->create(
             [
-                'name' => 'Москва',
+                'name' => 'Moscow',
                 'country_id' => $country->id,
                 'lat' => $ll_array['lat'],
                 'lng' => $ll_array['lng']
@@ -78,7 +78,7 @@ class OrderTest extends TestCase
 
         $city = factory(App\City::class)->create(
             [
-                'name' => 'Москва',
+                'name' => 'Moscow',
                 'country_id' => $country->id
             ]
         );
@@ -168,7 +168,7 @@ class OrderTest extends TestCase
 
         $city = factory(App\City::class)->create(
             [
-                'name' => 'Москва',
+                'name' => 'Moscow',
                 'country_id' => $country->id
             ]
         );
@@ -235,7 +235,7 @@ class OrderTest extends TestCase
         //Большой театр
         //$response = $this->call('GET', );
         $client = new GuzzleHttp\Client();
-        $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json?address=%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B9+%D1%82%D0%B5%D0%B0%D1%82%D1%80&components=administrative_area:%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0|country:%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F&key=AIzaSyDRznmJXKt96uYHIwNpFNNKpeqHo6WkvVQ');
+        $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json?address=Bolshoi%20Theater&components=administrative_area:Moscow|country:Russia&key=AIzaSyDRznmJXKt96uYHIwNpFNNKpeqHo6WkvVQ');
         $ll_array = $this->getLanLng(json_decode($res->getBody(), true));
         // Создать заявку
         $response = $this->call('POST', route('order.post'), ['city_id' => $city->id, 'lat' => $ll_array['lat'], 'lng' => $ll_array['lng'], 'text' => 'Большой театр' ]);
@@ -248,28 +248,26 @@ class OrderTest extends TestCase
         //---------------------------------------------------------------------------------------
         //Кремль
         $client = new GuzzleHttp\Client();
-        $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json?address=Кремль&components=administrative_area:Москва|country:Россия&key=AIzaSyDRznmJXKt96uYHIwNpFNNKpeqHo6WkvVQ');
+
+        $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json?address=Kremlin&components=administrative_area:Moscow|country:Russia&key=AIzaSyDRznmJXKt96uYHIwNpFNNKpeqHo6WkvVQ');
         $ll_array = $this->getLanLng(json_decode($res->getBody(), true));
         // Создать заявку
         $response = $this->call('POST', route('order.post'), ['city_id' => $city->id, 'lat' => $ll_array['lat'], 'lng' => $ll_array['lng'], 'text' => 'Кремль' ]);
-        $this->assertEquals(201, $response->status()); //TODO здесь другой ответ
+        $this->assertEquals(201, $response->status());
 
-        $result_array = json_decode($response->content(), true); //TODO getJsonResponse в отдельный класс, так как везде используетчся
+        $result_array = json_decode($response->content(), true);
         $created_orders_id[] = $result_array['id'];
 
         //-----------------------------------------------------------------------------------------------
 
         //2. И одна точка в Перми, вне города Москвы
-        //Серго, Пермь
         $client = new GuzzleHttp\Client();
-        $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json?address=%D0%9C%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80%D1%81%D0%BA%D0%B0%D1%8F,61&components=administrative_area:%D0%9F%D0%B5%D1%80%D0%BC%D1%8C|country:%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F&key=AIzaSyDRznmJXKt96uYHIwNpFNNKpeqHo6WkvVQ');
-        $res->getStatusCode(); // 200
-        $res->getBody(); //tckb 6
+        $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json?address=Zvezda&components=administrative_area:Perm|country:Russia&key=AIzaSyDRznmJXKt96uYHIwNpFNNKpeqHo6WkvVQ');
         $ll_array = $this->getLanLng(json_decode($res->getBody(), true));
 
         // Создать заявку
         $response = $this->call('POST', route('order.post'), ['city_id' => $city2->id, 'lat' => $ll_array['lat'], 'lng' => $ll_array['lng'], 'text' => 'Серго' ]);
-        $this->assertEquals(201, $response->status()); //TODO здесь другой ответ
+        $this->assertEquals(201, $response->status());
 
         $result_array = json_decode($response->content(), true);
 
@@ -277,7 +275,7 @@ class OrderTest extends TestCase
 
         //3. Делается запрос на поиск по радиусу от Москвы
         $response = $this->call('GET', route('order.radius'), ['city_id' => $city->id, 'radius' => 1010]);
-        $this->assertEquals(200, $response->status()); //TODO здесь другой ответ
+        $this->assertEquals(200, $response->status());
         $result_array = json_decode($response->content(), true);
 
 
