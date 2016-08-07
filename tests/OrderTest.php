@@ -238,7 +238,7 @@ class OrderTest extends TestCase
         $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json?address=Bolshoi%20Theater&components=administrative_area:Moscow|country:Russia&key=AIzaSyDRznmJXKt96uYHIwNpFNNKpeqHo6WkvVQ');
         $ll_array = $this->getLanLng(json_decode($res->getBody(), true));
         // Создать заявку
-        $response = $this->call('POST', route('order.post'), ['city_id' => $city->id, 'lat' => $ll_array['lat'], 'lng' => $ll_array['lng'], 'text' => 'Большой театр' ]);
+        $response = $this->call('POST', route('order.post'), ['city_id' => $city->id, 'lat' => $ll_array['lat'], 'lng' => $ll_array['lng'], 'text' => 'Bolshoi Theater' ]);
 
         $this->assertEquals(201, $response->status());
 
@@ -252,7 +252,7 @@ class OrderTest extends TestCase
         $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json?address=Kremlin&components=administrative_area:Moscow|country:Russia&key=AIzaSyDRznmJXKt96uYHIwNpFNNKpeqHo6WkvVQ');
         $ll_array = $this->getLanLng(json_decode($res->getBody(), true));
         // Создать заявку
-        $response = $this->call('POST', route('order.post'), ['city_id' => $city->id, 'lat' => $ll_array['lat'], 'lng' => $ll_array['lng'], 'text' => 'Кремль' ]);
+        $response = $this->call('POST', route('order.post'), ['city_id' => $city->id, 'lat' => $ll_array['lat'], 'lng' => $ll_array['lng'], 'text' => 'Kremlin' ]);
         $this->assertEquals(201, $response->status());
 
         $result_array = json_decode($response->content(), true);
@@ -266,7 +266,7 @@ class OrderTest extends TestCase
         $ll_array = $this->getLanLng(json_decode($res->getBody(), true));
 
         // Создать заявку
-        $response = $this->call('POST', route('order.post'), ['city_id' => $city2->id, 'lat' => $ll_array['lat'], 'lng' => $ll_array['lng'], 'text' => 'Серго' ]);
+        $response = $this->call('POST', route('order.post'), ['city_id' => $city2->id, 'lat' => $ll_array['lat'], 'lng' => $ll_array['lng'], 'text' => 'Zvezda' ]);
         $this->assertEquals(201, $response->status());
 
         $result_array = json_decode($response->content(), true);
@@ -277,7 +277,6 @@ class OrderTest extends TestCase
         $response = $this->call('GET', route('order.radius'), ['city_id' => $city->id, 'radius' => 1010]);
         $this->assertEquals(200, $response->status());
         $result_array = json_decode($response->content(), true);
-
 
         //4. Проверка количества заявок
         $this->assertEquals(2, count($result_array));
@@ -292,13 +291,12 @@ class OrderTest extends TestCase
 
         // 5. Запрос заявок в радиусе от Перми
         $response = $this->call('GET', route('order.radius'), ['city_id' => $city2->id, 'radius' => 100]);
-        $this->assertEquals(200, $response->status()); //TODO здесь другой ответ
+        $this->assertEquals(200, $response->status());
         $result_array = json_decode($response->content(), true);
 
         //6. Проверка количества заявок
         $this->assertEquals(1, count($result_array));
 
         $this->assertEquals($created_orders_id[2], $result_array[0]['id'] );
-
     }
 }
