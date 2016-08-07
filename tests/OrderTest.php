@@ -218,13 +218,13 @@ class OrderTest extends TestCase
         ]);
         $city = factory(App\City::class)->create(
             [
-                'name' => 'Москва',
+                'name' => 'Moscow',
                 'country_id' => $country->id
             ]
         );
         $city2 = factory(App\City::class)->create(
             [
-                'name' => 'Пермь',
+                'name' => 'Perm',
                 'country_id' => $country->id
             ]
         );
