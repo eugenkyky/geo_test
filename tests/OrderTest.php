@@ -233,7 +233,6 @@ class OrderTest extends TestCase
 
         // 1 Создается пара заявок около города Москва
         //Большой театр
-        //$response = $this->call('GET', );
         $client = new GuzzleHttp\Client();
         $res = $client->get('https://maps.googleapis.com/maps/api/geocode/json?address=Bolshoi%20Theater&components=administrative_area:Moscow|country:Russia&key=AIzaSyDRznmJXKt96uYHIwNpFNNKpeqHo6WkvVQ');
         $ll_array = $this->getLanLng(json_decode($res->getBody(), true));
