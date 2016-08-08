@@ -16,7 +16,7 @@ chmod 777 storage/logs &&
 composer install &&
 #create schema
 php artisan migrate &&
-cd public/ &&
+cd public &&
 nohup php -S 127.0.0.1:80 index.php &&
 #create users dir
 echo "Deploy task succeded" &&
