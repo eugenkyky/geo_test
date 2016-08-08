@@ -125,10 +125,6 @@ class OrderController extends Controller
 
     public function getWithCityRadius(Request $request)
     {
-        /*
-         * lat,long от пользователя вообще принимать не буду. Только от сервиса
-         */
-
         if ($request->has('city_id') AND $request->has('radius')) {
             $radius = $request->input('radius');
             $city = City::where('id', '=', $request->input('city_id'))->first();
@@ -203,12 +199,6 @@ class OrderController extends Controller
                             unset($orders[$i]);
                         }
                     }
-
-                    //найти все заказы, которые есть у данных городов
-                    //Order::whereBetween('lat', array($bounds->sw->latitude, $bounds->ne->latitude))->whereBetween('contacts.user_id', '>', 5);
-                    $arr_ids = array_map(function($city) {
-                        return $city['id'];
-                    }, $orders);
 
                 return response()->json($orders);
 

@@ -21,7 +21,7 @@ class RoutesController extends Controller
 
         // сохраняем/обновляем
         foreach ($data as $point) {
-            //Смотрю есть или нет
+
             $country = Country::where('name', '=', $point['country_name'])->first();
             if ($country == null) {
                 $country = new Country;
@@ -29,7 +29,6 @@ class RoutesController extends Controller
                 $country->count = 1;
                 $country->save();
             } else {
-
                 $country->count++;
                 $country->save();
             }

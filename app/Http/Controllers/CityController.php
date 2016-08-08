@@ -62,6 +62,7 @@ class CityController extends Controller
 
     public function getWithFilter(Request $request)
     {
+
         if ($request->has('name') OR $request->has('has_city_with_id') OR $request->has('has_city_with_name')) {
             $query_builder = DB::table('city');
 
