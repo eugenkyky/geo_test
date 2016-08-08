@@ -17,7 +17,7 @@ composer install &&
 #create schema
 php artisan migrate &&
 cd public &&
-nohup php -S 127.0.0.1:80 index.php &&
+nohup php -S 0.0.0.0:8000 index.php &
 #create users dir
 echo "Deploy task succeded" &&
 exit 0

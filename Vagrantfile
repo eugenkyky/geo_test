@@ -70,6 +70,6 @@ Vagrant.configure("2") do |config|
   # SHELL
 
   config.vm.provision :shell, path: "deploy.sh"
-  config.vm.network :forwarded_port, guest: 80, host: 4567
+  config.vm.network :forwarded_port, guest: 8000, host: 4567
 
 end
