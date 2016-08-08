@@ -19,7 +19,7 @@ $ vagrant up
 ```bash
 $ vagrant ssh
 $ cd test_assignment
-$ sudo nohup php -S 0.0.0.0:8000 web/index.php &
+$ sudo nohup php -S 0.0.0.0:8000 public/index.php &
 $ vendor/bin/phpunit tests/ 
 ```
 
@@ -60,5 +60,5 @@ Route::get('/orders/search', 'OrderController@getWithFilter')->name('order.searc
 6. Проверка количества заявок
 
 #### В описании к вакансии был указан плюс
-Плюсом будет опыт построения распределенных систем
+Плюсом будет опыт построения распределенных систем.
 Есть понимание как строятся такого типа системы. Автором документа являюсь я: https://www.dropbox.com/s/eilhe6vgx9yok9u/Highload%20Architecture.docx?dl=0
